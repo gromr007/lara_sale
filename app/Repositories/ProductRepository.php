@@ -15,6 +15,10 @@ class ProductRepository
         return $productQuery;
     }
 
+    public function getPaginate($perPage)
+    {
+        return Product::query()->paginate($perPage)->withQueryString();
+    }
 
 
 }

@@ -3,11 +3,8 @@
 namespace App\Services\Basket;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
-use App\Models\Product;
 use App\Models\User;
-use \App\Models\Basketposition;
 
 use App\Services\Basket\Positions\BasketPositions;
 use App\Services\Basket\Positions\CookPositions;
