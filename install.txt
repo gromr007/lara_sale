@@ -1,5 +1,26 @@
 //============================
 php artisan key:generate
+php artisan migrate
+//============================
+git init
+git add -A
+git commit -m "Start"
+git remote add origin git@github.com:gromr007/lara_sale.git
+git push origin master
+//============================
+git switch -c feature/One
+git checkout master
+git rebase feature/One
+
+git rebase --abort
+git add -A
+git rebase --continue
+git rebase --skip
+
+git branch -D feature/One
+
+git push origin master
+//============================
 composer require laravel/fortify
 php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"
 php artisan migrate
@@ -10,24 +31,21 @@ php artisan migrate:rollback --step=1
 ---delete laravel/sail:
 composer remove laravel/sail
 //============================
-git checkout -b feature/auth_jetstrim_lLiveware
-git push origin feature/auth_jetstrim_lLiveware
-git branch -D feature/auth_jetstrim_lLiveware
 //============================
-git checkout -b feature/auth_sanctum
-git push origin feature/auth_sanctum
-git branch -D feature/auth_sanctum
 //============================
-git checkout -b feature/view
-git push origin feature/view
-git branch -D feature/view
 //============================
-git checkout -b feature/db
-git push origin feature/db
-git branch -D feature/db
 //============================
-
-php artisan make:model Product -mcr
-Route::resource('tidings', '\App\Http\Controllers\TidingController');
-php artisan optimize:clear
-php artisan route:list --name=tidings
+//============================
+//============================
+//============================
+//============================
+//============================
+//============================
+//============================
+//============================
+//============================
+//============================
+//============================
+//============================
+//============================
+//============================
