@@ -101,11 +101,13 @@ class Basket
     public function getPosArr()
     {
         $basketPosArr = [];
-        foreach($this->positions as $pos) {
-            $basketPosArr[$pos->product_id] = [
-                'product_id' => $pos->product_id,
-                'kolvo' => $pos->kolvo,
-            ];
+        if(!empty($this->positions)) {
+            foreach ($this->positions as $pos) {
+                $basketPosArr[$pos->product_id] = [
+                    'product_id' => $pos->product_id,
+                    'kolvo' => $pos->kolvo,
+                ];
+            }
         }
         return $basketPosArr;
     }
@@ -117,8 +119,10 @@ class Basket
     public function getPosIds()
     {
         $ids = [];
-        foreach($this->positions as $pos) {
-            $ids[] = $pos->product_id;
+        if(!empty($this->positions)) {
+            foreach($this->positions as $pos) {
+                $ids[] = $pos->product_id;
+            }
         }
         return $ids;
     }

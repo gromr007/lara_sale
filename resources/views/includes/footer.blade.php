@@ -10,7 +10,7 @@
 
                     <!-- Footer Logo Start -->
                     <div class="footer-logo">
-                        <a href="index.html"><img src="assets/images/logo.png" alt="Logo"></a>
+                        <a href="index.html"><img src="/images/logo.png" alt="Logo"></a>
                     </div>
                     <!-- Footer Logo End -->
 
@@ -21,7 +21,7 @@
                     <div class="footer-contact-payment">
                         <div class="footer-contact">
                             <div class="contact-icon">
-                                <img src="assets/images/icon/icon-4.png" alt="Icon">
+                                <img src="/images/icon/icon-4.png" alt="Icon">
                             </div>
 
                             <div class="contact-content">
@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="footer-payment">
-                            <img src="assets/images/payment.png" alt="Payment">
+                            <img src="/images/payment.png" alt="Payment">
                         </div>
                     </div>
                     <!-- Footer Contact & Payment End -->
@@ -80,14 +80,12 @@
                 <div class="col-lg-2 col-md-4 col-sm-6">
                     <!-- Footer Widget Start -->
                     <div class="footer-widget">
-                        <h4 class="footer-widget-title">Information</h4>
+                        <h4 class="footer-widget-title">Аккаунт</h4>
 
                         <ul class="footer-link">
-                            <li><a href="#">About Furbar</a></li>
-                            <li><a href="#">How to Shop</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Contact us</a></li>
-                            <li><a href="#">Log in</a></li>
+                            <li><a href="{{ route('login') }}">Войти</a></li>
+                            <li><a href="{{ route('register') }}">Регистрация</a></li>
+                            <li><a href="{{ route('logoutGet') }}">Выйти</a></li>
                         </ul>
                     </div>
                     <!-- Footer Widget End -->
@@ -95,14 +93,12 @@
                 <div class="col-lg-2 col-md-4 col-sm-6">
                     <!-- Footer Widget Start -->
                     <div class="footer-widget">
-                        <h4 class="footer-widget-title">My Account</h4>
+                        <h4 class="footer-widget-title">Разделы</h4>
 
                         <ul class="footer-link">
-                            <li><a href="#">Sign In</a></li>
-                            <li><a href="#">View Cart</a></li>
-                            <li><a href="#">My Wishlist</a></li>
-                            <li><a href="#">Track My Order</a></li>
-                            <li><a href="#">Help</a></li>
+                            <li><a href="/">Домой</a></li>
+                            <li><a href="{{route('cart')}}">Корзина</a></li>
+                            <li><a href="{{route('account')}}">Аккаунт</a></li>
                         </ul>
                     </div>
                     <!-- Footer Widget End -->

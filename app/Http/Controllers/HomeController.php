@@ -21,6 +21,8 @@ class HomeController extends Controller
 
         return view('home')
             ->with('title', 'Витрина')
+            ->with('products', $products)
+            ->with('productsBasketIds', $productsBasketIds)
             ->with('nameRoute', 'home');
 
     }

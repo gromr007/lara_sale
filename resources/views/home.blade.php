@@ -3,7 +3,7 @@
 @section('content')
 
     <!-- Shop Section Start -->
-    <div class="section section-padding mt-n10">
+    <div class="section section-padding mt-n10" data_name_route="<?= !empty($nameRoute) ? $nameRoute : '' ?>" >
         <div class="container">
 
             <div class="row flex-row-reverse">
@@ -11,7 +11,7 @@
                     <!-- Shop top Bar Start -->
                     <div class="shop-top-bar">
                         <div class="shop-text">
-                            <p><span>12</span> Product Found of <span>30</span></p>
+                            <p><span>{{$products->perPage() * $products->currentPage()}}</span> продуктов показано из <span>{{$products->total()}}</span></p>
                         </div>
                         <div class="shop-tabs">
                             <ul class="nav">
@@ -36,223 +36,42 @@
 
                             <!-- Shop Product Wrapper Start -->
                             <div class="shop-product-wrapper">
-                                <div class="row">
-                                    <div class="col-lg-4 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-product">
-                                            <a href="#"><img src="assets/images/product/product-01.jpg" alt="product"></a>
-                                            <div class="product-content">
-                                                <h4 class="title"><a href="product-details.html">Elona bedside grey table</a></h4>
-                                                <div class="price">
-                                                    <span class="sale-price">$40.00</span>
+                                <div class="row content">
+
+                                    @foreach($products as $product)
+
+                                        <div class="col-lg-4 col-sm-6">
+                                            <!-- Single Product Start -->
+                                            <div class="single-product">
+                                                <a href="#"><img src="{{$product->image}}" alt="product"></a>
+                                                <div class="product-content">
+                                                    <h4 class="title"><a href="{{$product->slug}}">{{$product->name}}</a></h4>
+                                                    <div class="price">
+                                                        <span class="sale-price">${{$product->price}}</span>
+                                                    </div>
                                                 </div>
+                                                <ul class="product-meta">
+                                                    <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="javascript:;"><i class="pe-7s-search"></i></a></li>
+                                                    <li>
+                                                        <form method="POST" action="{{ route('cart_add') }}">
+                                                            @csrf
+                                                            <input type="hidden" name="product_id" value="{{$product->id}}"/>
+                                                            <input type="hidden" name="kolvo" value="1"/>
+                                                            @if(in_array($product->id, $productsBasketIds))
+                                                                <a class="action basket" href="javascript:;"><i class="pe-7s-shopbag"></i></a>
+                                                            @else
+                                                                <a class="action" href="javascript:;" onclick="parentNode.submit();"><i class="pe-7s-shopbag"></i></a>
+                                                            @endif
+                                                        </form>
+                                                    </li>
+                                                    <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
+                                                </ul>
                                             </div>
-                                            <ul class="product-meta">
-                                                <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                            </ul>
+                                            <!-- Single Product End -->
                                         </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-product">
-                                            <a href="#"><img src="assets/images/product/product-02.jpg" alt="product"></a>
-                                            <div class="product-content">
-                                                <h4 class="title"><a href="product-details.html">Simple minimal Chair</a></h4>
-                                                <div class="price">
-                                                    <span class="sale-price">$240.00</span>
-                                                </div>
-                                            </div>
-                                            <ul class="product-meta">
-                                                <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-product">
-                                            <a href="#"><img src="assets/images/product/product-03.jpg" alt="product"></a>
-                                            <div class="product-content">
-                                                <h4 class="title"><a href="product-details.html">Pendant Chandelier Light</a></h4>
-                                                <div class="price">
-                                                    <span class="sale-price">$240.00</span>
-                                                </div>
-                                            </div>
-                                            <ul class="product-meta">
-                                                <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-product">
-                                            <a href="#"><img src="assets/images/product/product-04.jpg" alt="product"></a>
-                                            <div class="product-content">
-                                                <h4 class="title"><a href="product-details.html">High quality vase bottle</a></h4>
-                                                <div class="price">
-                                                    <span class="sale-price">$240.00</span>
-                                                </div>
-                                            </div>
-                                            <ul class="product-meta">
-                                                <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-product">
-                                            <a href="#"><img src="assets/images/product/product-05.jpg" alt="product"></a>
-                                            <div class="product-content">
-                                                <h4 class="title"><a href="product-details.html">Living & Bedroom Chair</a></h4>
-                                                <div class="price">
-                                                    <span class="sale-price">$240.00</span>
-                                                </div>
-                                            </div>
-                                            <ul class="product-meta">
-                                                <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-product">
-                                            <a href="#"><img src="assets/images/product/product-06.jpg" alt="product"></a>
-                                            <div class="product-content">
-                                                <h4 class="title"><a href="product-details.html">Herman Arm Grey Chair</a></h4>
-                                                <div class="price">
-                                                    <span class="sale-price">$240.00</span>
-                                                </div>
-                                            </div>
-                                            <ul class="product-meta">
-                                                <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-product">
-                                            <a href="#"><img src="assets/images/product/product-07.jpg" alt="product"></a>
-                                            <div class="product-content">
-                                                <h4 class="title"><a href="product-details.html">Wooden decorations</a></h4>
-                                                <div class="price">
-                                                    <span class="sale-price">$240.00</span>
-                                                </div>
-                                            </div>
-                                            <ul class="product-meta">
-                                                <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-product">
-                                            <a href="#"><img src="assets/images/product/product-08.jpg" alt="product"></a>
-                                            <div class="product-content">
-                                                <h4 class="title"><a href="product-details.html">Herman Seater Sofa</a></h4>
-                                                <div class="price">
-                                                    <span class="sale-price">$240.00</span>
-                                                </div>
-                                            </div>
-                                            <ul class="product-meta">
-                                                <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-product">
-                                            <a href="#"><img src="assets/images/product/product-09.jpg" alt="product"></a>
-                                            <div class="product-content">
-                                                <h4 class="title"><a href="product-details.html">Reece Seater Sofa</a></h4>
-                                                <div class="price">
-                                                    <span class="sale-price">$240.00</span>
-                                                </div>
-                                            </div>
-                                            <ul class="product-meta">
-                                                <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-product">
-                                            <a href="#"><img src="assets/images/product/product-10.jpg" alt="product"></a>
-                                            <div class="product-content">
-                                                <h4 class="title"><a href="product-details.html">Round Swivel Chair</a></h4>
-                                                <div class="price">
-                                                    <span class="sale-price">$240.00</span>
-                                                </div>
-                                            </div>
-                                            <ul class="product-meta">
-                                                <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-product">
-                                            <a href="#"><img src="assets/images/product/product-12.jpg" alt="product"></a>
-                                            <div class="product-content">
-                                                <h4 class="title"><a href="product-details.html">Modern Accent Chair</a></h4>
-                                                <div class="price">
-                                                    <span class="sale-price">$240.00</span>
-                                                </div>
-                                            </div>
-                                            <ul class="product-meta">
-                                                <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-product">
-                                            <a href="#"><img src="assets/images/product/product-13.jpg" alt="product"></a>
-                                            <div class="product-content">
-                                                <h4 class="title"><a href="product-details.html">Wood Dining Table</a></h4>
-                                                <div class="price">
-                                                    <span class="sale-price">$240.00</span>
-                                                </div>
-                                            </div>
-                                            <ul class="product-meta">
-                                                <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                                <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
+
+                                    @endforeach
+
                                 </div>
                             </div>
                             <!-- Shop Product Wrapper End -->
@@ -261,196 +80,41 @@
                         <div class="tab-pane fade" id="list">
 
                             <!-- Shop Product Wrapper Start -->
-                            <div class="shop-product-wrapper">
+                            <div class="shop-product-wrapper content">
 
+                            @foreach($products as $product)
                                 <!-- Single Product Start -->
-                                <div class="single-product-02 product-list">
-                                    <div class="product-images">
-                                        <a href="#"><img src="assets/images/product/product-01.jpg" alt="product"></a>
+                                    <div class="single-product-02 product-list">
+                                        <div class="product-images">
+                                            <a href="#"><img src="{{$product->image}}" alt="product"></a>
 
-                                        <ul class="product-meta">
-                                            <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-content">
-                                        <h4 class="title"><a href="product-details.html">Elona bedside grey table</a></h4>
-                                        <div class="price">
-                                            <span class="sale-price">$40.00</span>
+                                            <ul class="product-meta">
+                                                <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="javascript:;"><i class="pe-7s-search"></i></a></li>
+                                                <li>
+                                                    <form method="POST" action="{{ route('cart_add') }}">
+                                                        @csrf
+                                                        <input type="hidden" name="product_id" value="{{$product->id}}"/>
+                                                        <input type="hidden" name="kolvo" value="1"/>
+                                                        @if(in_array($product->id, $productsBasketIds))
+                                                            <a class="action basket" href="javascript:;"><i class="pe-7s-shopbag"></i></a>
+                                                        @else
+                                                            <a class="action" href="javascript:;" onclick="parentNode.submit();"><i class="pe-7s-shopbag"></i></a>
+                                                        @endif
+                                                    </form>
+                                                </li>
+                                                <li><a class="action" href="javascript:;"><i class="pe-7s-like"></i></a></li>
+                                            </ul>
                                         </div>
-                                        <p>Block out the haters with the fresh adidas® Originals Kaval Windbreaker Jacket. Part of the Kaval Collection. Regular fit is eased, but not sloppy, and perfect for any activity. Plain-woven jacket specifically constructed for freedom of movement. </p>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                                <!-- Single Product Start -->
-                                <div class="single-product-02 product-list">
-                                    <div class="product-images">
-                                        <a href="#"><img src="assets/images/product/product-02.jpg" alt="product"></a>
-
-                                        <ul class="product-meta">
-                                            <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-content">
-                                        <h4 class="title"><a href="product-details.html">Simple minimal Chair</a></h4>
-                                        <div class="price">
-                                            <span class="sale-price">$40.00</span>
+                                        <div class="product-content">
+                                            <h4 class="title"><a href="{{$product->slug}}">{{$product->name}}</a></h4>
+                                            <div class="price">
+                                                <span class="sale-price">${{$product->price}}</span>
+                                            </div>
+                                            <p>{!! $product->description !!}</p>
                                         </div>
-                                        <p>Block out the haters with the fresh adidas® Originals Kaval Windbreaker Jacket. Part of the Kaval Collection. Regular fit is eased, but not sloppy, and perfect for any activity. Plain-woven jacket specifically constructed for freedom of movement. </p>
                                     </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                                <!-- Single Product Start -->
-                                <div class="single-product-02 product-list">
-                                    <div class="product-images">
-                                        <a href="#"><img src="assets/images/product/product-03.jpg" alt="product"></a>
-
-                                        <ul class="product-meta">
-                                            <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-content">
-                                        <h4 class="title"><a href="product-details.html">Pendant Chandelier Light</a></h4>
-                                        <div class="price">
-                                            <span class="sale-price">$40.00</span>
-                                        </div>
-                                        <p>Block out the haters with the fresh adidas® Originals Kaval Windbreaker Jacket. Part of the Kaval Collection. Regular fit is eased, but not sloppy, and perfect for any activity. Plain-woven jacket specifically constructed for freedom of movement. </p>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                                <!-- Single Product Start -->
-                                <div class="single-product-02 product-list">
-                                    <div class="product-images">
-                                        <a href="#"><img src="assets/images/product/product-04.jpg" alt="product"></a>
-
-                                        <ul class="product-meta">
-                                            <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-content">
-                                        <h4 class="title"><a href="product-details.html">High quality vase bottle</a></h4>
-                                        <div class="price">
-                                            <span class="sale-price">$40.00</span>
-                                        </div>
-                                        <p>Block out the haters with the fresh adidas® Originals Kaval Windbreaker Jacket. Part of the Kaval Collection. Regular fit is eased, but not sloppy, and perfect for any activity. Plain-woven jacket specifically constructed for freedom of movement. </p>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                                <!-- Single Product Start -->
-                                <div class="single-product-02 product-list">
-                                    <div class="product-images">
-                                        <a href="#"><img src="assets/images/product/product-05.jpg" alt="product"></a>
-
-                                        <ul class="product-meta">
-                                            <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-content">
-                                        <h4 class="title"><a href="product-details.html">Living & Bedroom Chair</a></h4>
-                                        <div class="price">
-                                            <span class="sale-price">$40.00</span>
-                                        </div>
-                                        <p>Block out the haters with the fresh adidas® Originals Kaval Windbreaker Jacket. Part of the Kaval Collection. Regular fit is eased, but not sloppy, and perfect for any activity. Plain-woven jacket specifically constructed for freedom of movement. </p>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                                <!-- Single Product Start -->
-                                <div class="single-product-02 product-list">
-                                    <div class="product-images">
-                                        <a href="#"><img src="assets/images/product/product-06.jpg" alt="product"></a>
-
-                                        <ul class="product-meta">
-                                            <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-content">
-                                        <h4 class="title"><a href="product-details.html">Herman Arm Grey Chair</a></h4>
-                                        <div class="price">
-                                            <span class="sale-price">$40.00</span>
-                                        </div>
-                                        <p>Block out the haters with the fresh adidas® Originals Kaval Windbreaker Jacket. Part of the Kaval Collection. Regular fit is eased, but not sloppy, and perfect for any activity. Plain-woven jacket specifically constructed for freedom of movement. </p>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                                <!-- Single Product Start -->
-                                <div class="single-product-02 product-list">
-                                    <div class="product-images">
-                                        <a href="#"><img src="assets/images/product/product-07.jpg" alt="product"></a>
-
-                                        <ul class="product-meta">
-                                            <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-content">
-                                        <h4 class="title"><a href="product-details.html">Wooden decorations</a></h4>
-                                        <div class="price">
-                                            <span class="sale-price">$40.00</span>
-                                        </div>
-                                        <p>Block out the haters with the fresh adidas® Originals Kaval Windbreaker Jacket. Part of the Kaval Collection. Regular fit is eased, but not sloppy, and perfect for any activity. Plain-woven jacket specifically constructed for freedom of movement. </p>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                                <!-- Single Product Start -->
-                                <div class="single-product-02 product-list">
-                                    <div class="product-images">
-                                        <a href="#"><img src="assets/images/product/product-08.jpg" alt="product"></a>
-
-                                        <ul class="product-meta">
-                                            <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-content">
-                                        <h4 class="title"><a href="product-details.html">Herman Seater Sofa</a></h4>
-                                        <div class="price">
-                                            <span class="sale-price">$40.00</span>
-                                        </div>
-                                        <p>Block out the haters with the fresh adidas® Originals Kaval Windbreaker Jacket. Part of the Kaval Collection. Regular fit is eased, but not sloppy, and perfect for any activity. Plain-woven jacket specifically constructed for freedom of movement. </p>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                                <!-- Single Product Start -->
-                                <div class="single-product-02 product-list">
-                                    <div class="product-images">
-                                        <a href="#"><img src="assets/images/product/product-09.jpg" alt="product"></a>
-
-                                        <ul class="product-meta">
-                                            <li><a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i class="pe-7s-search"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-shopbag"></i></a></li>
-                                            <li><a class="action" href="#"><i class="pe-7s-like"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-content">
-                                        <h4 class="title"><a href="product-details.html">Reece Seater Sofa</a></h4>
-                                        <div class="price">
-                                            <span class="sale-price">$40.00</span>
-                                        </div>
-                                        <p>Block out the haters with the fresh adidas® Originals Kaval Windbreaker Jacket. Part of the Kaval Collection. Regular fit is eased, but not sloppy, and perfect for any activity. Plain-woven jacket specifically constructed for freedom of movement. </p>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
+                                    <!-- Single Product End -->
+                                @endforeach
 
                             </div>
                             <!-- Shop Product Wrapper End -->
@@ -461,11 +125,11 @@
                     <!-- Page pagination Start -->
                     <div class="page-pagination">
                         <ul class="pagination justify-content-center">
-                            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link active" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                            <li class="page-item"><a class="page-link" href="/?page=1"><i class="fa fa-angle-left"></i></a></li>
+                            @for($i=1; $i<=$products->lastPage(); $i++)
+                                <li class="page-item"><a class="page-link {{ ((int)$products->currentPage() === $i) ? 'active' : '' }}" href="/?page={{$i}}">{{$i}}</a></li>
+                            @endfor
+                            <li class="page-item"><a class="page-link" href="/?page={{$products->lastPage()}}"><i class="fa fa-angle-right"></i></a></li>
                         </ul>
                     </div>
                     <!-- Page pagination End -->
@@ -625,6 +289,8 @@
                             </div>
                         </div>
                         <!-- Sidebar Widget End -->
+
+
 
                         <!-- Sidebar Widget Start -->
                         <div class="sidebar-widget">

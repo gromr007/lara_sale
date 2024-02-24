@@ -1,0 +1,9 @@
+.single-product:hover .product-meta li .action.basket:hover,
+.single-product-02:hover .product-meta li .action.basket:hover {
+    border-color: #f22d00;
+    background-color: #f24400;
+}
+.section.page-banner-section {
+    background-image: url('/images/page-banner.gif');
+}
+

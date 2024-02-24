@@ -30,6 +30,9 @@ class SaleController extends Controller
 
         return view('cart')
             ->with('title', 'Корзина')
+            ->with('quantities', $quantities)
+            ->with('products', $products)
+            ->with('summPrice', $summPrice)
             ->with('nameRoute', 'cart');
     }
 
@@ -88,9 +91,13 @@ class SaleController extends Controller
     {
         $nameRoute = 'confirmOrder';
 
+        (empty($order)) ? $error = false : $error = true;
+
         return view('confirm_order')
             ->with('title', 'Завершение заказа')
-            ->with('nameRoute',$nameRoute);
+            ->with('order', $order)
+            ->with('error', $error)
+            ->with('nameRoute', $nameRoute);
 
     }
 
