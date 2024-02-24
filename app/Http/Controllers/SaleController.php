@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\ProductRepository;
+use App\Services\Basket\Basket;
 use Illuminate\Http\Request;
 
 
@@ -11,7 +13,20 @@ class SaleController extends Controller
     /**
      * Страница корзины
      * */
-    public function cart(){
+    public function cart(ProductRepository $repository, Basket $basket){
+
+        //Берем количество по позициям в корзине
+        $quantities = $basket->getPosArr();
+
+        //Массив Id товаров в корзине
+        $ids = $basket->getPosIds();
+
+        //Берем продукты корзины
+        $productsQuery = $repository->getWhereIn($ids);
+        $products = $productsQuery->get();
+
+        //Берем Общую сумму корзины
+        $summPrice = $basket->getSummAllPos($products);
 
         return view('cart')
             ->with('title', 'Корзина')
