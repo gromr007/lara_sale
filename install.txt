@@ -1,0 +1,33 @@
+//============================
+php artisan key:generate
+composer require laravel/fortify
+php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"
+php artisan migrate
+php artisan optimize:clear
+php artisan migrate:refresh --seed
+php artisan migrate:rollback --step=1
+//============================
+---delete laravel/sail:
+composer remove laravel/sail
+//============================
+git checkout -b feature/auth_jetstrim_lLiveware
+git push origin feature/auth_jetstrim_lLiveware
+git branch -D feature/auth_jetstrim_lLiveware
+//============================
+git checkout -b feature/auth_sanctum
+git push origin feature/auth_sanctum
+git branch -D feature/auth_sanctum
+//============================
+git checkout -b feature/view
+git push origin feature/view
+git branch -D feature/view
+//============================
+git checkout -b feature/db
+git push origin feature/db
+git branch -D feature/db
+//============================
+
+php artisan make:model Product -mcr
+Route::resource('tidings', '\App\Http\Controllers\TidingController');
+php artisan optimize:clear
+php artisan route:list --name=tidings
