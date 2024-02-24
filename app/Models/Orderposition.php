@@ -3,18 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Orderposition extends Model
 {
-    use HasApiTokens;
     use HasFactory;
-    use Notifiable;
-    use TwoFactorAuthenticatable;
     use SoftDeletes;
 
 
@@ -24,30 +18,7 @@ class User extends Authenticatable
     |--------------------------------------------------------------------------
     */
 
-            /**
-             * The attributes that are mass assignable.
-             */
-            protected $fillable = [
-                'name',
-                'email',
-                'password',
-            ];
-
-            /**
-             * The attributes that should be hidden for serialization.
-             */
-            protected $hidden = [
-                'password',
-                'remember_token',
-            ];
-
-            /**
-             * The attributes that should be cast.
-             */
-            protected $casts = [
-                'email_verified_at' => 'datetime',
-            ];
-
+        protected $fillable = ['kolvo', 'price', 'product_id', 'order_id'];
 
 
     /*
@@ -62,16 +33,24 @@ class User extends Authenticatable
     |--------------------------------------------------------------------------
     */
 
+            /**
+             * Связь с таблицей Заказ
+             * */
+            public function order(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+            {
+                return $this->belongsTo(Order::class);
+            }
+
 
             /**
-             * Связь с таблицей Позиции корзины
-             */
-            public function basketpositions(): \Illuminate\Database\Eloquent\Relations\hasMany
+             * Связь с таблицей Продукты
+             * */
+            public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
             {
-
-                return $this->hasMany(Basketposition::class);
-
+                return $this->belongsTo(Product::class);
             }
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -90,6 +69,8 @@ class User extends Authenticatable
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+
 
 
 
