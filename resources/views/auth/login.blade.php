@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-</head>
-
-<body>
+@section('content')
 
     <div class="login-register-wrapper">
         <h4 class="title">Авторизация</h4>
@@ -40,6 +33,7 @@
         @endif
     </div>
 
-</body>
+@endsection
 
-</html>
+
+
