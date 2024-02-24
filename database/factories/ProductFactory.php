@@ -23,12 +23,10 @@ class ProductFactory extends Factory
     public function definition(): array
     {
 
-        $name = $this->faker->sentence;
         $name = $this->faker->unique()->text(rand(5,15));
         $slug = Str::slug($name, '_');
         $price = $this->faker->numberBetween($min = 1500, $max = 6000);
         $description = $this->faker->realText(rand(300,700));
-        //$image = $this->faker->imageUrl($width = 270, $height = 303);
         $image = '/images/product/' . $this->faker->randomElement([
             'product-01.webp',
             'product-02.webp',

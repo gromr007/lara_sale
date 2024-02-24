@@ -17,7 +17,7 @@ class Order extends Model
     |--------------------------------------------------------------------------
     */
 
-            protected $table = 'orders';
+            protected string $table = 'orders';
             protected $guarded = ['id'];
             protected $fillable = ['summ', 'user_id'];
 
@@ -42,6 +42,14 @@ class Order extends Model
 
                 return $this->hasMany(Orderposition::class);
 
+            }
+
+            /*
+             * Связь многие ко многим с таблицей Product через таблицу orderpositions
+             * */
+            public function products(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+            {
+                return $this->belongsToMany(Product::class, 'orderpositions');
             }
 
     /*
