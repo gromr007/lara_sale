@@ -1,6 +1,23 @@
 
 {{--Миникорзина--}}
 
+@if(Auth::user())
+    @if($quantities)
+        <a class="action" href="#" role="button" data-bs-toggle="dropdown">
+            <i class="pe-7s-shopbag"></i>
+        </a>
+    @else
+        <a class="action" href="javascript:;" role="button">
+            <i class="pe-7s-shopbag"></i>
+        </a>
+    @endif
+@else
+    <a class="action" href="{{ route('login') }}" role="button">
+        <i class="pe-7s-shopbag"></i>
+    </a>
+@endif
+
+
 <div class="dropdown-menu dropdown-cart">
     <div class="cart-content" id="cart-content">
         <ul>

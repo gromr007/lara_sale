@@ -60,10 +60,7 @@
                     <a class="action" href="#"><i class="pe-7s-like"></i></a>
 
                     <div class="dropdown">
-                        <a class="action" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="pe-7s-shopbag"></i>
-                            <span class="number">3</span>
-                        </a>
+
 
                         {{--Миникорзина--}}
                         <x-minibasket />

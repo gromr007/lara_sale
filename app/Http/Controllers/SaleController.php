@@ -20,6 +20,10 @@ class SaleController extends Controller
         //Берем количество по позициям в корзине
         $quantities = $basket->getPosArr();
 
+        if(!$quantities) {
+            return redirect()->route('home');
+        }
+
         //Массив Id товаров в корзине
         $ids = $basket->getPosIds();
 
