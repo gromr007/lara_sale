@@ -8,12 +8,6 @@ use Illuminate\Support\Str;
 
 class ProductFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected string $model = Product::class;
 
     /**
      * Define the model's default state.
