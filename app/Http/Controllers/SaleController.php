@@ -42,9 +42,12 @@ class SaleController extends Controller
      * Инкрементирует,
      * Декрементирует количество товара в позиции
      * */
-    public function changePosCart(Request $request) {
+    public function changePosCart(Request $request, Basket $basket) {
 
         $masRequest = $request->all();
+
+        //Изменяем продукт в корзине
+        $basket->addProductsBasket($masRequest);
 
         return redirect()->back();
 
@@ -54,9 +57,12 @@ class SaleController extends Controller
     /**
      * Удаляет позицию товара из корзины
      * */
-    public function deletePos(Request $request) {
+    public function deletePos(Request $request, Basket $basket) {
 
         $masRequest = $request->all();
+
+        //Изменяем продукт в корзине
+        $basket->deleteProductsBasket($masRequest);
 
         return redirect()->back();
 
@@ -66,9 +72,12 @@ class SaleController extends Controller
     /**
      * Полная очистка корзины
      * */
-    public function clearCart(Request $request) {
+    public function clearCart(Request $request, Basket $basket) {
 
         $masRequest = $request->all();
+
+        //Очищаем корзину
+        $basket->clearProductsBasket();
 
         return redirect()->back();
 
@@ -84,7 +93,7 @@ class SaleController extends Controller
     }
 
 
-    /*
+    /**
      * Страница завершения заказа
      * */
     public function confirmOrder($order='')

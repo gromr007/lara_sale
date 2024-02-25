@@ -20,5 +20,9 @@ class ProductRepository
         return Product::query()->paginate($perPage)->withQueryString();
     }
 
+    public function getFirst($productId)
+    {
+        return Product::where('id', $productId)->first();
+    }
 
 }

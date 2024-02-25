@@ -55,7 +55,7 @@
                                                     <li>
                                                         <form method="POST" action="{{ route('cart_add') }}">
                                                             @csrf
-                                                            <input type="hidden" name="product_id" value="{{$product->id}}"/>
+                                                            <input type="hidden" name="id_product" value="{{$product->id}}"/>
                                                             <input type="hidden" name="kolvo" value="1"/>
                                                             @if(in_array($product->id, $productsBasketIds))
                                                                 <a class="action basket" href="javascript:;"><i class="pe-7s-shopbag"></i></a>
@@ -93,7 +93,7 @@
                                                 <li>
                                                     <form method="POST" action="{{ route('cart_add') }}">
                                                         @csrf
-                                                        <input type="hidden" name="product_id" value="{{$product->id}}"/>
+                                                        <input type="hidden" name="id_product" value="{{$product->id}}"/>
                                                         <input type="hidden" name="kolvo" value="1"/>
                                                         @if(in_array($product->id, $productsBasketIds))
                                                             <a class="action basket" href="javascript:;"><i class="pe-7s-shopbag"></i></a>

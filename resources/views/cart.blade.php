@@ -40,7 +40,7 @@
                                     <div class="product-quantity d-inline-flex">
                                         <form method="POST" action="{{ route('cart_add') }}">
                                             @csrf
-                                            <input type="hidden" name="product_id" value="{{$product->id}}"/>
+                                            <input type="hidden" name="id_product" value="{{$product->id}}"/>
                                             <button type="submit" class="sub">-</button>
                                             <input name="kolvo" type="text" value="{{$quantities[$product->id]['kolvo']}}" />
                                             <button type="submit" class="add">+</button>
@@ -53,7 +53,7 @@
                                 <td class="product-action">
                                     <form method="POST" action="{{ route('position_delete') }}">
                                         @csrf
-                                        <input type="hidden" name="product_id" value="{{$product->id}}"/>
+                                        <input type="hidden" name="id_product" value="{{$product->id}}"/>
                                         <a class="remove" href="javascript:;" onclick="parentNode.submit();"><i class="pe-7s-trash"></i></a>
                                     </form>
                                 </td>

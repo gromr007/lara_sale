@@ -10,6 +10,8 @@ use App\Services\Basket\Positions\BasketPositions;
 use App\Services\Basket\Positions\CookPositions;
 use App\Services\Basket\Positions\OrderPositions;
 
+use App\Services\Basket\Adders\AuthAdder;
+use App\Services\Basket\Adders\CookAdder;
 
 
 /**
@@ -148,6 +150,29 @@ class Basket
         }
         return $summPrice;
     }
+
+
+    /**
+     * Добавляем продукт в корзину
+     */
+    public function addProductsBasket($masRequest): ?int
+    {
+
+        if(!empty(Auth::user())) { //Для авторизированных
+            $adder = new AuthAdder($masRequest);
+        } else {
+            $adder = new CookAdder($masRequest);
+        }
+        $idPos = $adder->addProduct();
+
+        return $idPos;
+    }
+
+
+
+
+
+
 
 
     /**
