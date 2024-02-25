@@ -159,13 +159,13 @@ class Basket
     /**
      * Добавляем продукт в корзину
      */
-    public function addProductsBasket($masRequest): ?int
+    public function addProductsBasket($request): ?int
     {
 
         if(!empty(Auth::user())) { //Для авторизированных
-            $adder = new AuthAdder($masRequest);
+            $adder = new AuthAdder($request);
         } else {
-            $adder = new CookAdder($masRequest);
+            $adder = new CookAdder($request);
         }
         $idPos = $adder->addProduct();
 

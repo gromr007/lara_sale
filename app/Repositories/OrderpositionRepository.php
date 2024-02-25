@@ -13,5 +13,11 @@ class OrderpositionRepository
         return $basketPosQuery;
     }
 
+    public function getPositionsQuery($orderId)
+    {
+        $orderPos = Orderposition::where('order_id', $orderId);
+        return $orderPos;
+    }
+
 
 }

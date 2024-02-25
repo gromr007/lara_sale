@@ -105,7 +105,8 @@ class SaleController extends Controller
                 return redirect()->route('confirm_order');
             }
         //Создаем заказ
-            $orders = new Orders($basket);
+            $orders = new Orders($masRequest);
+            $orders->setBasket($basket);
             $orderObj = $orders->createOrder();
 
         //Возвращаем результат
@@ -115,6 +116,22 @@ class SaleController extends Controller
             else {
                 return redirect()->route('confirm_order');
             }
+    }
+
+
+
+    /**
+     * Страница удаления заказа
+     */
+    public function deleteCheckout(Request $request, $orderId): \Illuminate\Http\RedirectResponse
+    {
+        $masRequest = $request->all();
+
+        //Удаляем заказ
+            $orders = new Orders($masRequest);
+            $orders->deleteOrder($orderId);
+
+        return redirect()->back();
     }
 
 

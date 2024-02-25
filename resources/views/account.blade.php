@@ -16,6 +16,7 @@
                             <th class="product-info">Товары</th>
                             <th class="product-quantity">Дата</th>
                             <th class="product-total-price">Цена</th>
+                            <th class="product-total-price">Удаление</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -35,6 +36,13 @@
                                 </td>
                                 <td class="product-total-price">
                                     <span class="price">${{ $order->summ }}</span>
+                                </td>
+                                <td class="product-action">
+                                    <form method="POST" action="{{ route('delete_checkout', ['order' => $order->id]) }}">
+                                        @csrf
+                                        <input type="hidden" name="id_order" value="{{$order->id}}"/>
+                                        <a class="remove" href="javascript:;" onclick="parentNode.submit();"><i class="pe-7s-trash"></i></a>
+                                    </form>
                                 </td>
 
                             </tr>

@@ -17,5 +17,10 @@ class OrderRepository
         return Order::query()->paginate($perPage)->withQueryString();
     }
 
+    public function getFirstId($userId, $orderId)
+    {
+        return Order::where('user_id', $userId)->where('id', $orderId)->first();
+    }
+
 
 }
