@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\ProductRepository;
 use App\Services\Basket\Basket;
+use App\Services\Orders\Orders;
 use Illuminate\Http\Request;
 
 
@@ -91,9 +92,25 @@ class SaleController extends Controller
     /**
      * Страница создания заказа
      */
-    public function storeCheckout(): \Illuminate\Http\RedirectResponse
+    public function storeCheckout(Request $request, Basket $basket): \Illuminate\Http\RedirectResponse
     {
-        return redirect()->route('confirm_order');
+        $masRequest = $request->all();
+
+        //Если пустая корзина
+            if(count($basket->getPosIds()) === 0) {
+                return redirect()->route('confirm_order');
+            }
+        //Создаем заказ
+            $orders = new Orders($basket);
+            $orderObj = $orders->createOrder();
+
+        //Возвращаем результат
+            if($orderObj) {
+                return redirect()->route('confirm_order', ['order' => $orderObj->id]);
+            }
+            else {
+                return redirect()->route('confirm_order');
+            }
     }
 
 
@@ -104,7 +121,7 @@ class SaleController extends Controller
     {
         $nameRoute = 'confirmOrder';
 
-        (empty($order)) ? $error = false : $error = true;
+        ($order) ? $error = false : $error = true;
 
         return view('confirm_order')
             ->with('title', 'Завершение заказа')
