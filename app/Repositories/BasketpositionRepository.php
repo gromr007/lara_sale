@@ -19,6 +19,7 @@ class BasketpositionRepository
 
     public function getProductUser($productId, $userId): ?Basketposition
     {
+
         return Basketposition::where('product_id', '=', $productId)
             ->where('user_id', '=', $userId)
             ->first();

@@ -13,7 +13,8 @@ class AuthAdder extends Adders
         //Добавляем продукт
         if(!empty($product)) {
             //Проверка нет ли продукта уже в корзине
-            $positionUser = $this->repositories['basketposition']->getProductUser($product->id, $this->user);
+                $positionUser = $this->repositories['basketposition']->getProductUser($product->id, $this->user->id);
+
             if(!empty($positionUser)) {
                 $positionUser->kolvo = $this->request['kolvo'];
                 $positionUser->save();

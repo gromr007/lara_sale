@@ -2,6 +2,8 @@
 
 namespace App\Services\Basket;
 
+use App\Services\Basket\Deleters\AuthDeleter;
+use App\Services\Basket\Deleters\CookDeleter;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
@@ -169,7 +171,24 @@ class Basket
     }
 
 
+    /**
+     * Удаляем продукт из корзины
+     */
+    public function deleteProductsBasket($masRequest): bool
+    {
 
+        if(!empty(Auth::user())) { //Для авторизированных
+            $deleter = new AuthDeleter($masRequest);
+        } else {
+            $deleter = new CookDeleter($masRequest);
+        }
+        $hasDelete = $deleter->deleteProduct();
+
+        //Обновляем параметры объекта корзины
+            $this->reloadPropertyBasket();
+
+        return $hasDelete;
+    }
 
 
 

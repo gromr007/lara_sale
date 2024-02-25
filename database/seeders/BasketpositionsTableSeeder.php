@@ -15,7 +15,7 @@ class BasketpositionsTableSeeder extends Seeder
      */
     public function run()
     {
-        Basketposition::factory(15)->create();
+        //Basketposition::factory(15)->create();
     }
 
 
