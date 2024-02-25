@@ -38,9 +38,9 @@
                                     <span class="price">${{ $order->summ }}</span>
                                 </td>
                                 <td class="product-action">
-                                    <form method="POST" action="{{ route('delete_checkout', ['order' => $order->id]) }}">
+                                    <form method="POST" action="{{ route('delete_checkout') }}">
                                         @csrf
-                                        <input type="hidden" name="id_order" value="{{$order->id}}"/>
+                                        <input type="hidden" name="id_order" value="{{ $order->id }}"/>
                                         <a class="remove" href="javascript:;" onclick="parentNode.submit();"><i class="pe-7s-trash"></i></a>
                                     </form>
                                 </td>

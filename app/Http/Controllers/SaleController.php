@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePosCartRequest;
+use App\Http\Requests\ConfirmOrderRequest;
+use App\Http\Requests\DeleteCheckoutRequest;
+use App\Http\Requests\DeletePosCartRequest;
+use App\Models\Order;
 use App\Repositories\ProductRepository;
 use App\Services\Basket\Basket;
 use App\Services\Orders\Orders;
@@ -48,7 +53,7 @@ class SaleController extends Controller
      * Инкрементирует,
      * Декрементирует количество товара в позиции
      * */
-    public function changePosCart(Request $request, Basket $basket): \Illuminate\Http\RedirectResponse
+    public function changePosCart(ChangePosCartRequest $request, Basket $basket): \Illuminate\Http\RedirectResponse
     {
 
         $masRequest = $request->all();
@@ -64,7 +69,7 @@ class SaleController extends Controller
     /**
      * Удаляет позицию товара из корзины
      * */
-    public function deletePos(Request $request, Basket $basket): \Illuminate\Http\RedirectResponse
+    public function deletePos(DeletePosCartRequest $request, Basket $basket): \Illuminate\Http\RedirectResponse
     {
 
         $masRequest = $request->all();
@@ -80,10 +85,8 @@ class SaleController extends Controller
     /**
      * Полная очистка корзины
      * */
-    public function clearCart(Request $request, Basket $basket): \Illuminate\Http\RedirectResponse
+    public function clearCart(Basket $basket): \Illuminate\Http\RedirectResponse
     {
-
-        $masRequest = $request->all();
 
         //Очищаем корзину
         $basket->clearProductsBasket();
@@ -123,13 +126,13 @@ class SaleController extends Controller
     /**
      * Страница удаления заказа
      */
-    public function deleteCheckout(Request $request, $orderId): \Illuminate\Http\RedirectResponse
+    public function deleteCheckout(DeleteCheckoutRequest $request): \Illuminate\Http\RedirectResponse
     {
         $masRequest = $request->all();
 
         //Удаляем заказ
             $orders = new Orders($masRequest);
-            $orders->deleteOrder($orderId);
+            $orders->deleteOrder($masRequest['id_order']);
 
         return redirect()->back();
     }
@@ -138,16 +141,14 @@ class SaleController extends Controller
     /**
      * Страница завершения заказа
      * */
-    public function confirmOrder($order='')
+    public function confirmOrder(Order $order)
     {
-        $nameRoute = 'confirmOrder';
 
-        ($order) ? $error = false : $error = true;
+        $nameRoute = 'confirmOrder';
 
         return view('confirm_order')
             ->with('title', 'Завершение заказа')
             ->with('order', $order)
-            ->with('error', $error)
             ->with('nameRoute', $nameRoute);
 
     }

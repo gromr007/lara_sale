@@ -29,7 +29,7 @@ Route::middleware([
     //Прием заказа
         Route::get('/checkout', [SaleController::class, 'storeCheckout'])->name('store_checkout');
     //Удаление заказа
-        Route::post('/checkout/delete/{order}', [SaleController::class, 'deleteCheckout'])->name('delete_checkout');
+        Route::post('/checkout/delete', [SaleController::class, 'deleteCheckout'])->name('delete_checkout');
     //Страница завершения заказа
         Route::get('/confirm/{order?}', [SaleController::class, 'confirmOrder'])->name('confirm_order');
     //Личный кабинет

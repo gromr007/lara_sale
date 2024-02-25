@@ -17,7 +17,6 @@ class Order extends Model
     |--------------------------------------------------------------------------
     */
 
-            protected string $table = 'orders';
             protected $guarded = ['id'];
             protected $fillable = ['summ', 'user_id'];
 
