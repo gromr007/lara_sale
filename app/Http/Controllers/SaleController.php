@@ -81,7 +81,7 @@ class SaleController extends Controller
         $masRequest = $request->all();
 
         //Очищаем корзину
-        //$basket->clearProductsBasket();
+        $basket->clearProductsBasket();
 
         return redirect()->back();
 

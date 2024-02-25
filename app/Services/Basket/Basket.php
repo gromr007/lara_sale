@@ -2,6 +2,8 @@
 
 namespace App\Services\Basket;
 
+use App\Services\Basket\Clears\AuthClear;
+use App\Services\Basket\Clears\CookClear;
 use App\Services\Basket\Deleters\AuthDeleter;
 use App\Services\Basket\Deleters\CookDeleter;
 use Illuminate\Support\Facades\Auth;
@@ -190,6 +192,21 @@ class Basket
         return $hasDelete;
     }
 
+    /*
+     * Очищаем корзину
+    */
+    public function clearProductsBasket(): bool
+    {
+        if(!empty(Auth::user())) {
+            $clear = new AuthClear();
+        } else {
+            $clear = new CookClear();
+        }
+
+        $hasClear = $clear->clearBasket();
+
+        return $hasClear;
+    }
 
 
 

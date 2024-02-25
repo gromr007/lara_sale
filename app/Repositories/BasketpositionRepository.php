@@ -9,7 +9,6 @@ class BasketpositionRepository
 
     public function getWithProduct($userId): \Illuminate\Database\Eloquent\Builder
     {
-
         $basketPosQuery = Basketposition::with('product');
 
         $basketPosQuery->where('user_id', $userId);
@@ -19,11 +18,14 @@ class BasketpositionRepository
 
     public function getProductUser($productId, $userId): ?Basketposition
     {
-
         return Basketposition::where('product_id', '=', $productId)
             ->where('user_id', '=', $userId)
             ->first();
+    }
 
+    public function getPositions($userId)
+    {
+        return Basketposition::where('user_id', $userId);
     }
 
 
