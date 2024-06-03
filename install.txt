@@ -1,3 +1,6 @@
+
+//============================
+https://github.com/gromr007/lara_sale
 //============================
 php artisan key:generate
 php artisan migrate
@@ -33,6 +36,9 @@ php artisan migrate:rollback --step=1
 composer remove laravel/sail
 //============================
 //============================
+
+
+
 //============================
 //============================
 //============================

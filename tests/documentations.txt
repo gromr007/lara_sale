@@ -1,0 +1,6 @@
+1)
+php artisan test
+php artisan make:test HomePageIndexTest
+php artisan make:test HomePageIndexTest --unit
+php artisan make:test HomePageIndexTest --pest
+php artisan make:test HomePageIndexTest --unit --pest
